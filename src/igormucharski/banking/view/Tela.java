@@ -1,56 +1,54 @@
 package igormucharski.banking.view;
 
+import java.io.IOException;
 import java.util.Scanner;
 
-import igormucharski.banking.controller.ClienteController;
+import igormucharski.banking.controller.AdmController;
 import igormucharski.banking.model.Acesso;
 
 public class Tela {
 
-	public void carregarMenu() {
+	static Scanner leitor = new Scanner(System.in);
+
+	public void menuPrincipal() throws IOException {
 
 		int opcaoEscolhida = 0;
-		Scanner lt = new Scanner(System.in);
-		System.out.println("===SEJA BEM-VINDO AO MUCHARSKI BANKING===");
+		AdmController controller = new AdmController();
+		System.out.println("======SEJA BEM-VINDO AO MUCHARSKI BANKING======");
 		System.out.println("SELECIONE A OPERAÇÃO DESEJADA: ");
 		System.out.println("1. Entrar");
 		System.out.println("2. Administração");
-		opcaoEscolhida = lt.nextInt();
+		opcaoEscolhida = leitor.nextInt();
 
 		switch (opcaoEscolhida) {
 
 		case 1:
-			// entrarConta();
+			
 			break;
 		case 2:
-			ClienteController controller = new ClienteController();
 			controller.entrarAdministracao();
 			break;
 		}
 
-		lt.close();
+		leitor.close();
 
 	}
 
-	public void entrarConta() {
+	public void loginConta() {
 
 	}
 
-	public Acesso usuarioAdministrador() {
+	public Acesso loginAdministrador() {
 		String usuario, senha;
 
-		Scanner sc = new Scanner(System.in);
-
 		System.out.println("Digite seu usuário de administrador: ");
-		usuario = sc.nextLine();
+		usuario = leitor.next();
 		System.out.println("Digite sua senha: ");
-		senha = sc.nextLine();
+		senha = leitor.next();
 
 		Acesso acesso = new Acesso();
 		acesso.setUsuario(usuario); // dá um set do nome do usuario
 		acesso.setSenha(senha); // **
-
-		sc.close();
 
 		return acesso; // retorna o objeto usuario+senha
 

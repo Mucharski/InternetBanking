@@ -2,9 +2,10 @@ package igormucharski.banking.dao;
 
 public interface DAO<SQL> {
 
-	SQL salvar(SQL entidade);
-	SQL atualizar (SQL entidade);
-	SQL buscarConta (SQL entidade);
+	SQL salvarCliente(SQL entidade);
+	SQL atualizarCliente (SQL entidade);
+	SQL buscarCliente (SQL entidade);
+	SQL excluirCliente(SQL entidade);
 	
 	
 }

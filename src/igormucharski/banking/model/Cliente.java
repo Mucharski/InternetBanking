@@ -6,17 +6,19 @@ public class Cliente {
 
 	private String nome;
 	private String sobrenome;
-	private String numConta;
+	private int numConta;
 	private String senha;
+	private String CPF;
 
 	// Construtor com parâmetros
-	public Cliente(String nome, String sobrenome, String numConta, String senha) {
+	public Cliente(String nome, String sobrenome, int numConta, String senha, String CPF) {
 
 		super();
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.numConta = numConta;
 		this.senha = senha;
+		this.CPF = CPF;
 
 	}
 
@@ -25,16 +27,32 @@ public class Cliente {
 	}
 
 	// Método para salvar os clientes no Banco de Dados
-	public void salvarCliente(String nome, String sobrenome, String numConta, String senha) {
+	public void salvarCliente(String nome, String sobrenome, int numConta, String senha, String CPF) {
 
 		ClienteDAO clienteDAO = new ClienteDAO();
 
-		Cliente cliente = new Cliente(nome, sobrenome, numConta, senha);
+		Cliente cliente = new Cliente(nome, sobrenome, numConta, senha, CPF);
 
-		clienteDAO.salvar(cliente);
+		clienteDAO.salvarCliente(cliente);
 
 		System.out.println(cliente);
 
+	}
+
+	public void buscarCliente(String CPF) {
+		
+		ClienteDAO clienteDAO = new ClienteDAO();
+		Cliente cliente = new Cliente();
+		cliente.setCPF(CPF);
+		clienteDAO.buscarCliente(cliente);
+		
+		if(cliente.getNome() != null) {
+			System.out.println(cliente);
+		} else {
+			System.out.println("Número da conta pesquisada não existe.");
+		}
+		
+		
 	}
 
 	public String getNome() {
@@ -53,11 +71,11 @@ public class Cliente {
 		this.sobrenome = sobrenome;
 	}
 
-	public String getNumConta() {
+	public int getNumConta() {
 		return numConta;
 	}
 
-	public void setNumConta(String numConta) {
+	public void setNumConta(int numConta) {
 		this.numConta = numConta;
 	}
 
@@ -67,6 +85,14 @@ public class Cliente {
 
 	public String getSenha() {
 		return senha;
+	}
+
+	public String getCPF() {
+		return CPF;
+	}
+
+	public void setCPF(String CPF) {
+		this.CPF = CPF;
 	}
 
 	@Override
