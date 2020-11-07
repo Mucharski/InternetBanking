@@ -1,13 +1,23 @@
 package igormucharski.banking.model;
 
-import igormucharski.banking.dao.ClienteDAO;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import igormucharski.banking.dao.ClienteDAO;
+import igormucharski.banking.view.TelaAdministrador;
+
+@Entity
+@Table(name = "clientes")
 public class Cliente {
 
 	private String nome;
 	private String sobrenome;
+	@Column(name = "num_conta")
 	private int numConta;
 	private String senha;
+	@Id
 	private String CPF;
 
 	// Construtor com parâmetros
@@ -35,24 +45,33 @@ public class Cliente {
 
 		clienteDAO.salvarCliente(cliente);
 
-		System.out.println(cliente);
-
 	}
 
 	public void buscarCliente(String CPF) {
-		
+
+		ClienteDAO clienteDAO = new ClienteDAO();
+		Cliente cliente = clienteDAO.buscarPorId(CPF);
+		TelaAdministrador view = new TelaAdministrador();
+
+		if (clienteDAO.buscarPorId(CPF) == null) {
+			System.out.println("Usuário não encontrado");
+			view.menuAdministracao();
+		} else {
+			System.out.println(cliente + "\n");
+		}
+
+	}
+	
+	public void atualizarCliente(String nome, String sobrenome, String senha, int numConta, String CPF) {
 		ClienteDAO clienteDAO = new ClienteDAO();
 		Cliente cliente = new Cliente();
+		cliente.setNome(nome);
+		cliente.setSobrenome(sobrenome);
+		cliente.setSenha(senha);
+		cliente.setNumConta(numConta);
 		cliente.setCPF(CPF);
-		clienteDAO.buscarCliente(cliente);
 		
-		if(cliente.getNome() != null) {
-			System.out.println(cliente);
-		} else {
-			System.out.println("Número da conta pesquisada não existe.");
-		}
-		
-		
+		clienteDAO.atualizarCliente(cliente);
 	}
 
 	public String getNome() {

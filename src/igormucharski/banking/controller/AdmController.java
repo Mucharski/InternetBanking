@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import igormucharski.banking.dao.AcessoDAO;
+import igormucharski.banking.dao.ClienteDAO;
 import igormucharski.banking.model.Acesso;
 import igormucharski.banking.model.Cliente;
 import igormucharski.banking.view.Tela;
@@ -59,7 +60,6 @@ public class AdmController {
 
 		cliente.salvarCliente(nome, sobrenome, numeroConta, senha, CPF);
 
-
 		return cliente;
 
 	}
@@ -69,11 +69,36 @@ public class AdmController {
 		String CPF;
 		System.out.println("Digite o CPF do cliente");
 		CPF = sc.nextLine();
-		
+
 		Cliente cliente = new Cliente();
 		cliente.buscarCliente(CPF);
+
+	}
+
+	public void atualizarCliente() {
+		String CPF, nome, sobrenome, senha;
+		int numConta = 0;
+
+		System.out.println("Digite o CPF do cliente que deseja atualizar as informações: ");
+		CPF = sc.nextLine();
+
+		ClienteDAO clienteDAO = new ClienteDAO();
+		Cliente cliente = clienteDAO.buscarPorId(CPF);
+		System.out.println("\n" + cliente + "\n");
+
+		System.out.println("Digite o novo nome: ");
+		nome = sc.nextLine();
+		System.out.println("Digite o novo sobrenome: ");
+		sobrenome = sc.nextLine();
+		System.out.println("Digite a nova senha: ");
+		senha = sc.nextLine();
+
+		CPF = cliente.getCPF();
+		numConta = cliente.getNumConta();
+
+		cliente.atualizarCliente(nome, sobrenome, senha, numConta, CPF);
 		
-		
+		//falta função de apagar
 
 	}
 

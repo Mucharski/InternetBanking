@@ -23,6 +23,9 @@ public class TelaAdministrador {
 		case 2:
 			controller.buscarCliente();
 			break;
+		case 3:
+			controller.atualizarCliente();
+			break;
 		}
 	}	
 }

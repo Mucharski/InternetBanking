@@ -4,5 +4,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="lib"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.21.jar"/>
+	<classpathentry kind="lib" path="lib/javax.persistence-api-2.2.jar"/>
+	<classpathentry kind="lib" path="lib/eclipselink.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-entitymanager-5.4.23.Final.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
