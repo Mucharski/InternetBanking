@@ -16,14 +16,12 @@ public class Tela {
 		AdmController controller = new AdmController();
 		System.out.println("======SEJA BEM-VINDO AO MUCHARSKI BANKING======");
 		System.out.println("SELECIONE A OPERAÇÃO DESEJADA: ");
-		System.out.println("1. Entrar");
 		System.out.println("2. Administração");
 		opcaoEscolhida = leitor.nextInt();
 
 		switch (opcaoEscolhida) {
 
 		case 1:
-			
 			break;
 		case 2:
 			controller.entrarAdministracao();
@@ -31,10 +29,6 @@ public class Tela {
 		}
 
 		leitor.close();
-
-	}
-
-	public void loginConta() {
 
 	}
 

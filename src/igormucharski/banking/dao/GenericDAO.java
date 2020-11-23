@@ -37,11 +37,10 @@ public abstract class GenericDAO<T> implements DAO<T> {
 			entityManager.flush();
 			t.commit();
 		} catch (PersistenceException e) {
-			System.out.println("O CPF informado já está cadastrado. Tente novamente");
+			System.out.println("\nCPF informado já está cadastrado. Tente novamente\n");
 			controller.criarCliente();
 		}
-		System.out.println("Cadastro realizado com sucesso!\n");
-		view.menuAdministracao();
+		System.out.println("\nCadastro realizado com sucesso!\n");
 		return entidade;
 	}
 
@@ -64,13 +63,18 @@ public abstract class GenericDAO<T> implements DAO<T> {
 	}
 
 	public void apagar(String CPF) {
-		T entidade = buscarPorId(CPF);
-		EntityTransaction tx = entityManager.getTransaction();
-		tx.begin();
-		T mergedEntity = entityManager.merge(entidade);
-		entityManager.remove(mergedEntity);
-		entityManager.flush();
-		tx.commit();
+		try {
+			T entidade = buscarPorId(CPF);
+			EntityTransaction tx = entityManager.getTransaction();
+			tx.begin();
+			T mergedEntity = entityManager.merge(entidade);
+			entityManager.remove(mergedEntity);
+			entityManager.flush();
+			tx.commit();
+			System.out.println("\nCliente removido\n");
+		} catch (IllegalArgumentException e) {
+			System.out.println("\nCPF informado não existe\n");
+		}
 	}
 
 }

@@ -50,7 +50,7 @@ public class AdmController {
 		nome = sc.nextLine();
 		System.out.println("Digite o sobrenome do cliente: ");
 		sobrenome = sc.nextLine();
-		numeroConta = numConta.nextInt(10000);
+		numeroConta = numConta.nextInt(10000); // gera um número aleatório para conta entre 0 e 9999
 		System.out.println("Digite o CPF do cliente: ");
 		CPF = sc.nextLine();
 		System.out.println("Digite a senha do cliente: ");
@@ -84,22 +84,35 @@ public class AdmController {
 
 		ClienteDAO clienteDAO = new ClienteDAO();
 		Cliente cliente = clienteDAO.buscarPorId(CPF);
-		System.out.println("\n" + cliente + "\n");
 
-		System.out.println("Digite o novo nome: ");
-		nome = sc.nextLine();
-		System.out.println("Digite o novo sobrenome: ");
-		sobrenome = sc.nextLine();
-		System.out.println("Digite a nova senha: ");
-		senha = sc.nextLine();
+		if (clienteDAO.buscarPorId(CPF) == null) {
 
-		CPF = cliente.getCPF();
-		numConta = cliente.getNumConta();
+			System.out.println("\nCPF não encontrado\n");
 
-		cliente.atualizarCliente(nome, sobrenome, senha, numConta, CPF);
-		
-		//falta função de apagar
+		} else {
 
+			System.out.println("\n" + cliente + "\n"); // printa o cliente encontrado pelo CPF
+
+			System.out.println("Digite o novo nome: ");
+			nome = sc.nextLine();
+			System.out.println("Digite o novo sobrenome: ");
+			sobrenome = sc.nextLine();
+			System.out.println("Digite a nova senha: ");
+			senha = sc.nextLine();
+
+			CPF = cliente.getCPF();
+			numConta = cliente.getNumConta();
+
+			cliente.atualizarCliente(nome, sobrenome, senha, numConta, CPF);
+		}
+	}
+
+	public void apagarCliente() {
+		String CPF;
+		System.out.println("Digite o CPF do cliente que deseja excluir: ");
+		CPF = sc.nextLine();
+		Cliente cliente = new Cliente();
+		cliente.apagarCliente(CPF);
 	}
 
 }

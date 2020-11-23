@@ -10,8 +10,6 @@ public class Programa {
 
 		Tela tela = new Tela();
 		tela.menuPrincipal();
-
-		// fazer as outra funções do administrador e a entrada nas respectivas contas
 		
 	}
 

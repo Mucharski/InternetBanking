@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import igormucharski.banking.dao.ClienteDAO;
-import igormucharski.banking.view.TelaAdministrador;
 
 @Entity
 @Table(name = "clientes")
@@ -51,17 +50,15 @@ public class Cliente {
 
 		ClienteDAO clienteDAO = new ClienteDAO();
 		Cliente cliente = clienteDAO.buscarPorId(CPF);
-		TelaAdministrador view = new TelaAdministrador();
 
 		if (clienteDAO.buscarPorId(CPF) == null) {
-			System.out.println("Usuário não encontrado");
-			view.menuAdministracao();
+			System.out.println("\nUsuário não encontrado\n");
 		} else {
 			System.out.println(cliente + "\n");
 		}
 
 	}
-	
+
 	public void atualizarCliente(String nome, String sobrenome, String senha, int numConta, String CPF) {
 		ClienteDAO clienteDAO = new ClienteDAO();
 		Cliente cliente = new Cliente();
@@ -70,9 +67,18 @@ public class Cliente {
 		cliente.setSenha(senha);
 		cliente.setNumConta(numConta);
 		cliente.setCPF(CPF);
-		
+
 		clienteDAO.atualizarCliente(cliente);
 	}
+
+	public void apagarCliente(String CPF) {
+		ClienteDAO clienteDAO = new ClienteDAO();
+		clienteDAO.apagar(CPF);
+
+	}
+	
+	
+	// GETTERS E SETTERS //
 
 	public String getNome() {
 		return nome;
